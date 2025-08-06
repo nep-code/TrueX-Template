@@ -23,7 +23,12 @@ TXM.init = function(){
 			TXM.params.interactions++;
 			$(TXM.ui.interactionContainer).get(0).innerHTML = "Interactions: "+TXM.params.interactions;
 
-			if(!$(TXM.ui.ico_interact).hasClass('ta-complete')) $(TXM.ui.ico_interact).addClass('ta-complete');
+			if(!$(TXM.ui.ico_interact).hasClass('ta-complete')) {
+				$(TXM.ui.ico_interact).addClass('ta-complete');
+				$(".interact-container").addClass('interact-container--complete');
+				$(".interact-text").hide();
+				
+			}
 			
 			setTimeout(function(){
 				if(TXM.params.preventAdContainerClick)
@@ -39,13 +44,15 @@ TXM.init = function(){
 	
 	TXM.params.interval_id = setInterval(function(){
 		TXM.params.current_time--;
-				
+
 		if(!TXM.params.current_time)
 		{
 			console.log("Time reached 0");
 			clearInterval(TXM.params.interval_id);
 			
 			TXM.api.true_attention.time_up = true;
+			$(".progress-ring").hide();
+			$(".progress-checkmark").show();
 			
 			if(!TXM.params.credited && TXM.params.interactions)
 			{
@@ -55,10 +62,10 @@ TXM.init = function(){
 			}
 		}
 		
-		if(TXM.params.current_time >= 10) $(TXM.ui.timeContainer).get(0).innerHTML = ":"+TXM.params.current_time;
-		else $(TXM.ui.timeContainer).get(0).innerHTML = ":0"+TXM.params.current_time;
+		if(TXM.params.current_time >= 10) $(TXM.ui.timeContainer).get(0).innerHTML = TXM.params.current_time;
+		else $(TXM.ui.timeContainer).get(0).innerHTML = "0"+TXM.params.current_time;
 		
-		draw();
+		updateRing();
 
 	}, 1000);
 
@@ -68,7 +75,7 @@ TXM.init = function(){
 
 TXM.params = {
 	_savedData: "[ ]",
-	current_step: 1,
+	currentStep: 1,
 	current_time: 31,
 	interval_id: null,
 	timeout_id: null,
@@ -127,23 +134,23 @@ TXM.dispatcher = {
 TXM.api = {
 	
 	incrementCurrentStep : function(){
-		TXM.api.track("navigation", "next", "step "+TXM.params.current_step++);
+		TXM.api.track("navigation", "next", "step "+TXM.params.currentStep++);
 		
 		TXM.api.getCurrentStep();
-		console.log("CURRENT_STEP: "+TXM.params.current_step);
+		console.log("CURRENT_STEP: "+TXM.params.currentStep);
 	},
 	
 	setCurrentStep : function(val){
-		TXM.api.track("navigation", (val-TXM.params.current_step == 1)?"next":"goto", "step "+val);
-		TXM.params.current_step = val;
+		TXM.api.track("navigation", (val-TXM.params.currentStep == 1)?"next":"goto", "step "+val);
+		TXM.params.currentStep = val;
 		
 		TXM.api.getCurrentStep();
-		console.log("CURRENT_STEP: "+TXM.params.current_step);
+		console.log("CURRENT_STEP: "+TXM.params.currentStep);
 	},
 	
 	getCurrentStep: function() {
-		$(TXM.ui.stepContainer).get(0).innerHTML = "Current Step: "+TXM.params.current_step;
-        return TXM.params.current_step;
+		$(TXM.ui.stepContainer).get(0).innerHTML = "Current Step: "+TXM.params.currentStep;
+        return TXM.params.currentStep;
     },
 	
 	track : function(type, label, value){
@@ -227,7 +234,7 @@ TXM.tracker = {
 		console.log(type +", "+ label+((value)?", "+value:""));
 		
 		markup += "<span class='txm_interaction'>&nbsp[Interaction]&nbsp</span>";
-		markup += "<span class='txm_step "+((type == "navigation")?"txm_navigation":"")+"'>&nbsp"+TXM.params.current_step+"&nbsp</span>";
+		markup += "<span class='txm_step "+((type == "navigation")?"txm_navigation":"")+"'>&nbsp"+TXM.params.currentStep+"&nbsp</span>";
 		markup += "<span class='txm_type'>&nbsp"+type+"&nbsp</span>";
 		markup += "<span class='txm_label'>&nbsp"+label+"&nbsp</span>";
 		
@@ -246,7 +253,7 @@ TXM.ui = {
 	truex_content: "#truex_content",
 	interactionContainer: "#interaction_count",
 	stepContainer: ".current_step",
-	timeContainer: ".hd-container-header-countdown",
+	timeContainer: ".progress-text",
 	logsContainer: "#txm_logs",
 	engagement: ".engagement",
 	ico_interact: ".hd-container-header-interact",
@@ -352,29 +359,28 @@ function polyfillCustomEvent(){
 	 window.CustomEvent = CustomEvent;
 }
 
-var hdprogresspiefill = document.getElementById('hd-progress-pie-fill'),
-	α = 0, 
-	π = Math.PI,
-	t = 80 ;
 
-	function draw() {
-		var per = TXM.params.current_time / 30,
-			cur = 360-(per*360)-0.01;
-		α = cur;
-		//α++;
-		//α %= 360;
-		var r = ( α * π / 180 )
-			, x = Math.sin( r ) * 12.5
-			, y = Math.cos( r ) * - 12.5
-			, mid = ( α > 180 ) ? 1 : 0
-			, anim = 'M 0 0 v -12.5 A 12.5 12.5 1 '
-				+ mid + ' 1 ' 
-				+  x  + ' ' 
-				+  y  + ' z';
 
-		//if(α <359.99) setTimeout(draw,t);
-		
-		hdprogresspiefill.setAttribute( 'd', anim );
-	}
-	
+/* Timer Ring */
+const circle = document.querySelector('.progress-ring-circle');
+const radius = circle.r.baseVal.value;
+const circumference = 2 * Math.PI * radius;
+
+// Initial setup
+circle.style.strokeDasharray = `${circumference} ${circumference}`;
+circle.style.strokeDashoffset = circumference;
+circle.style.transition = 'stroke-dashoffset 1s linear';
+
+// Update function — call in your draw() or animation loop
+function updateRing() {
+	var per = TXM.params.current_time / 30; // 30 → 0
+	per = Math.min(Math.max(per, 0), 1); // clamp between 0 and 1
+
+	// Reverse percent for countdown fill-up
+	let reversed = 1 - per;
+	circle.style.strokeDashoffset = circumference * (1 - reversed); 
+	// or just: circle.style.strokeDashoffset = circumference * per;
+}
+
+
 TXM.init();
