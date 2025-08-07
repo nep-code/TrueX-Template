@@ -41,9 +41,7 @@ body {
 }
 
 /* New Header */
-title {
-    display: none;
-}
+title { display: none }
 
 .container-header {
     position: absolute;
@@ -85,12 +83,6 @@ title {
     transition: .5s opacity ease-in-out;
 }
 
-
-
-
-
-
-
 .container-header circle {
     transition: stroke-dashoffset linear;
     transform: rotate(-90deg);
@@ -116,7 +108,12 @@ title {
     background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyNy4yLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAzMDAgMzAwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAzMDAgMzAwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojRkZGRkZGO30NCjwvc3R5bGU+DQo8Zz4NCgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTUwLDIuMUM2OC4zLDIuMSwyLjEsNjguMywyLjEsMTUwUzY4LjMsMjk3LjksMTUwLDI5Ny45UzI5Ny45LDIzMS43LDI5Ny45LDE1MFMyMzEuNywyLjEsMTUwLDIuMXoNCgkJIE0yMTguNSwxMjQuOGwtNzQuNyw3NC43Yy0zLjIsMy4yLTcuNiw1LTEyLjEsNWMtNC41LDAtOC45LTEuOC0xMi4xLTVsLTM4LjItMzguMmMtNi43LTYuNy02LjctMTcuNSwwLTI0LjINCgkJYzYuNy02LjcsMTcuNS02LjcsMjQuMiwwbDI2LjEsMjYuMWw2Mi42LTYyLjZjNi43LTYuNywxNy41LTYuNywyNC4yLDBDMjI1LjIsMTA3LjMsMjI1LjIsMTE4LjEsMjE4LjUsMTI0Ljh6Ii8+DQo8L2c+DQo8L3N2Zz4NCg==);
 }
 
-
+.container-header__timer.remove {
+    display: none;
+}
+.container-header__timer.hide {
+    opacity: 0;
+}
 
 /* interact-container */
 
@@ -142,6 +139,14 @@ title {
 .interact-container.interact-container--complete .interact-indicator {
     background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyNy4yLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAzMDAgMzAwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAzMDAgMzAwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojRkZGRkZGO30NCjwvc3R5bGU+DQo8Zz4NCgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTUwLDIuMUM2OC4zLDIuMSwyLjEsNjguMywyLjEsMTUwUzY4LjMsMjk3LjksMTUwLDI5Ny45UzI5Ny45LDIzMS43LDI5Ny45LDE1MFMyMzEuNywyLjEsMTUwLDIuMXoNCgkJIE0yMTguNSwxMjQuOGwtNzQuNyw3NC43Yy0zLjIsMy4yLTcuNiw1LTEyLjEsNWMtNC41LDAtOC45LTEuOC0xMi4xLTVsLTM4LjItMzguMmMtNi43LTYuNy02LjctMTcuNSwwLTI0LjINCgkJYzYuNy02LjcsMTcuNS02LjcsMjQuMiwwbDI2LjEsMjYuMWw2Mi42LTYyLjZjNi43LTYuNywxNy41LTYuNywyNC4yLDBDMjI1LjIsMTA3LjMsMjI1LjIsMTE4LjEsMjE4LjUsMTI0Ljh6Ii8+DQo8L2c+DQo8L3N2Zz4NCg==);
     opacity: 1;
+}
+
+.interact-container.remove {
+    display: none;
+}
+.interact-container.hide {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .interact-text {
@@ -171,6 +176,42 @@ title {
     transition: .5s opacity ease-in-out;
     will-change: opacity;
 }
+
+.hd-container-header-relevance-text {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10px;
+    user-select: none;
+    transition: .5s opacity ease-in-out;
+    opacity: 1;
+}
+
+.hd-container-header-relevance-faces {
+    transition: .5s opacity ease-in-out;
+    opacity: 1;
+}
+
+.container-header #header-thumbs-up, .container-header #header-thumbs-down {
+    width: 15px;
+    height: 15px;
+}
+
+.container-header #header-thumbs-up {
+    margin-bottom: 5px;
+}
+
+.hd-container-header-relevance-faces svg {
+    cursor: pointer;
+}
+
+.hd-container-header-relevance.show {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+}
+
 
 /* header-bolton-survey */
 .container-header .header-bolton-survey {
@@ -210,98 +251,6 @@ title {
     flex-direction: column;
     justify-content: center;
     user-select: none;
-}
-
-/* OLD */
-
-.hd-container-header {
-	position: absolute;
-    top: -40px;
-    left: 0;
-    width: 960px;
-    height: 40px;
-    background: #525252;
-    box-shadow: inset 0 -10px 5px -10px rgba(0, 0, 0, 0.75);
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    font-family: "Helvetica-Neue", helvetica, arial, sans-serif;
-    line-height: 1;
-    letter-spacing: 0.5px;
-}
-
-.hd-container-header-timer {
-	overflow: hidden;
-    float: left;
-    padding: 8px 0 0 8px;
-    width: 75px;
-    height: 100%;
-    border-right: 1px solid #3e3e3e;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    vertical-align: middle;
-}
-
-.hd-progress-pie {
-	width: 24px;
-    height: 24px;
-    vertical-align: middle;
-	overflow: hidden;
-    display: inline-block;
-    position: relative;
-    z-index: 0;
-    border-radius: 50%;
-    background: #3e3e3e;
-}
-
-#hd-progress-pie-fill { fill: #999999 }
-
-.hd-container-header-countdown {
-    display: inline-block;
-    color: #bbb;
-    font-size: 15px;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: default;
-	font-family: "Helvetica-Neue", helvetica, arial, sans-serif;
-}
-
-.hd-container-header-interact {
-	overflow: hidden;
-    float: left;
-    width: 46px;
-    height: 100%;
-    background-image: url(https://media.truex.com/image_assets/2020-08-02/594d93e0-6e38-46e6-8542-f73ba12936b8.png);
-/*	background-image: url(img_interact.png);*/
-    background-repeat: no-repeat;
-    background-position: 0 0;
-    background-size: 46px auto;
-    border-right: 1px solid #3e3e3e;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.hd-container-header-interact.ta-complete {
-	background-position: 0 -40px !important;
-}
-
-.hd-container-header-message {
-	padding-left: 116px;
-    height: 100%;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.hd-container-close-confirm-dialog {
-	display: none;
-    position: absolute;
-    z-index: 3;
-    top: 40px;
-    right: 0;
-    width: 225px;
-    background: #3e3e3e;
 }
 
 .debug_output_container {

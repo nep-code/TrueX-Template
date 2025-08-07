@@ -59,6 +59,9 @@ TXM.init = function(){
 				TXM.params.credited = true;
 				TXM.api.true_attention.completed = true;
 				TXM.dispatcher.dispatchEvent("ENGAGEMENT_CREDITED");
+				$(".hd-container-header-relevance").addClass("show");
+				$(".interact-container, .container-header__timer").addClass("remove");
+				
 			}
 		}
 		
