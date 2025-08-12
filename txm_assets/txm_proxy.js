@@ -85,7 +85,12 @@ TXM.params = {
 	credited: false,
 	interactions: 0,
 	preventContainerClick: false,
-	desktop: true,
+	targetPlatform: {
+		ctv: false,
+		desktop: true,
+		mobile: false,
+		tablet: false
+	},
 	autoplay_with_sound_disabled: true,
 	location_json: { postal_code: "12754" }
 }
