@@ -79,6 +79,7 @@ TXM.init = function(){
 TXM.params = {
 	_savedData: "[ ]",
 	currentStep: 1,
+	trueAttentionSeconds: 30,
 	current_time: 31,
 	interval_id: null,
 	timeout_id: null,
@@ -381,7 +382,7 @@ circle.style.transition = 'stroke-dashoffset 1s linear';
 
 // Update function — call in your draw() or animation loop
 function updateRing() {
-	var per = TXM.params.current_time / 30; // 30 → 0
+	var per = TXM.params.current_time / TXM.params.trueAttentionSeconds;
 	per = Math.min(Math.max(per, 0), 1); // clamp between 0 and 1
 
 	// Reverse percent for countdown fill-up
